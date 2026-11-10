@@ -1,0 +1,19 @@
+jobs:
+  connect:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Install sshpass
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y sshpass
+
+      - name: Connect to VPS
+        run: |
+          export SSHPASS='[YOUR_PASSWORD]'
+
+          sshpass -e ssh \
+            -o StrictHostKeyChecking=accept-new \
+            -p 22 \
+            YOUR_USERNAME@YOUR_SERVER_IP \
+            'whoami && hostname && uptime'
